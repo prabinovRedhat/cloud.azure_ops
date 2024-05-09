@@ -3,7 +3,6 @@
 
 # Default values for role variables
 azure_manage_resource_group_name: "testing-resource-group"
-azure_manage_resource_group_operation: create
 azure_manage_resource_group_region: "eastus"
 azure_manage_resource_group_lock_resource_group: false
 azure_manage_resource_group_tags: 
