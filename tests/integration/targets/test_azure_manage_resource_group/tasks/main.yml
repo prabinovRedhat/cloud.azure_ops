@@ -23,6 +23,7 @@
           - rg_info.resourcegroups.name == azure_manage_resource_group_name
           - rg_info.resourcegroups.location == azure_manage_resource_group_region
           - rg_info.resourcegroups.tags == azure_manage_resource_group_tags
+          - azure_manage_resource_group_lock_resource_group == false
 
     # Test: Delete Resource Group without locking
     - name: Delete Resource Group without locking
