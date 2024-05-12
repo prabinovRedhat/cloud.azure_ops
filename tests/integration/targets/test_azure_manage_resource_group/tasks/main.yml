@@ -3,7 +3,7 @@
   block:
     - name: Print a message 0
       ansible.builtin.debug:
-        msg: "This is a simple print statement in Ansible"
+        msg: "{{ azure_manage_resource_group_name }}, {{ azure_manage_resource_group_region }}, {{ azure_manage_resource_group_tags }}"
 
     # Test: Create Resource Group without locking
     - name: Create Resource Group without locking
