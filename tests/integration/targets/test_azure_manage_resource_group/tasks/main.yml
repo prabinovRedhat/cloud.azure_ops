@@ -35,7 +35,7 @@
         name: cloud.azure_ops.azure_manage_resource_group
       vars:
         azure_manage_resource_group_operation: delete
-        azure_manage_resource_group_name: "{{ azure_manage_resource_group_name }}"
+        azure_manage_resource_group_name: "smiron"
 
     - name: Get Resource Group
       azure.azcollection.azure_rm_resourcegroup_info:
