@@ -2,7 +2,7 @@
 # defaults file for azure_manage_resource_group
 
 # Default values for role variables
-azure_manage_resource_group_name: "testingResourceGroup"
+azure_manage_resource_group_name: "smiron"
 azure_manage_resource_group_region: "eastus"
 azure_manage_resource_group_lock_resource_group: false
 azure_manage_resource_group_tags: 
