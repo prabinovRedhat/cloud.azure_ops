@@ -5,7 +5,7 @@
 azure_manage_resource_group_name: "testing-resource-group"
 azure_manage_resource_group_region: "eastus"
 azure_manage_resource_group_lock_resource_group: false
-azure_manage_resource_group_tags: 
-  resource_prefix: "{{ resource_prefix }}"
+# azure_manage_resource_group_tags: 
+#   resource_prefix: "{{ resource_prefix }}"
 azure_manage_resource_group_force_delete_nonempty: false
 azure_manage_resource_group_force_delete_locked: false
