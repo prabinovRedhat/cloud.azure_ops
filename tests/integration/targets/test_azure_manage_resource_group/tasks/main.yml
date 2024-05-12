@@ -1,6 +1,10 @@
 ---
 - name: Test role cloud.azure_ops.azure_manage_resource_group
   block:
+    - name: Print a message 0
+      ansible.builtin.debug:
+      msg: "This is a simple print statement in Ansible"
+
     # Test: Create Resource Group without locking
     - name: Create Resource Group without locking
       ansible.builtin.include_role:
