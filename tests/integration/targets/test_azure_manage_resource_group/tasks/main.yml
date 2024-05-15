@@ -86,7 +86,7 @@
           - rg_info.resourcegroups | length == 1
           - rg_info.resourcegroups[0].name == azure_manage_resource_group_name_test
           - rg_info.resourcegroups[0].location == azure_manage_resource_group_region
-          - rg_info.resourcegroups[0].tags == azure_manage_resource_group_region_test
+          - rg_info.resourcegroups[0].tags == azure_manage_resource_group_tags_test
           - azure_manage_resource_group_lock_resource_group == true
 
     # Test: Try to delete Locked Resource Group without force
