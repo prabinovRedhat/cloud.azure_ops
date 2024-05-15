@@ -62,9 +62,9 @@
       ansible.builtin.assert:
         that:
           - rg_info.resourcegroups | length == 1
-          - rg_info.resourcegroups.name == azure_manage_resource_group_name_test
-          - rg_info.resourcegroups.location == azure_manage_resource_group_region_test
-          - rg_info.resourcegroups.tags == azure_manage_resource_group_region_test
+          - rg_info.resourcegroups[0].name == azure_manage_resource_group_name_test
+          - rg_info.resourcegroups[0].location == azure_manage_resource_group_region_test
+          - rg_info.resourcegroups[0].tags == azure_manage_resource_group_region_test
           - azure_manage_resource_group_lock_resource_group == true
 
     # Test: Try to delete Locked Resource Group without force
@@ -107,4 +107,5 @@
     - name: Delete Resource Group
       azure.azcollection.azure_rm_resourcegroup:
         name: "{{ azure_manage_resource_group_name_test }}"
+        azure_manage_resource_group_force_delete_nonempty: true
         state: absent
