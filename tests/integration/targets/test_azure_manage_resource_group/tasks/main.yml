@@ -24,6 +24,10 @@
         name: "{{ azure_manage_resource_group_name_test }}"
       register: rg_info
 
+    - name: Print a message 0
+      ansible.builtin.debug:
+        msg: "RESOURCE GROUP - {{ rg_info.resourcegroups }} "
+
     - name: Assert that Resource Group was created without locking
       ansible.builtin.assert:
         that:
