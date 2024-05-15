@@ -53,6 +53,7 @@
     - name: Delete Resource Group (always)
       azure.azcollection.azure_rm_resourcegroup:
         name: "{{ azure_manage_resource_group_name_test }}"
+        force_delete_nonempty: true
         state: absent
       when: rg_info.resourcegroups | length > 0  # Only delete if resource group exists
 
@@ -130,6 +131,6 @@
     - name: Delete Resource Group (always)
       azure.azcollection.azure_rm_resourcegroup:
         name: "{{ azure_manage_resource_group_name_test }}"
-        azure_manage_resource_group_force_delete_locked: true
+        force_delete_nonempty: true
         state: absent
       when: rg_info.resourcegroups | length > 0  # Only delete if resource group exists
