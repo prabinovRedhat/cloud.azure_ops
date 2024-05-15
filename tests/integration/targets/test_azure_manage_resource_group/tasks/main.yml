@@ -43,6 +43,9 @@
           - rg_info.resourcegroups | length == 0
 
   always:
+    - name: Check always task rg_info
+      ansible.builtin.debug:
+        msg: "rg_info is {{ rg_info.resourcegroups }}"
     - name: Delete Resource Group (always)
       azure.azcollection.azure_rm_resourcegroup:
         name: "{{ azure_manage_resource_group_name_test }}"
@@ -113,6 +116,9 @@
           - rg_info.resourcegroups | length == 0
 
   always:
+    - name: Check always task rg_info
+      ansible.builtin.debug:
+        msg: "rg_info is {{ rg_info.resourcegroups }}"
     - name: Delete Resource Group (always)
       azure.azcollection.azure_rm_resourcegroup:
         name: "{{ azure_manage_resource_group_name_test }}"
