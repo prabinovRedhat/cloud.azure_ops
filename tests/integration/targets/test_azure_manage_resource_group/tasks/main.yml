@@ -56,6 +56,7 @@
       azure.azcollection.azure_rm_resourcegroup_info:
         name: "{{ azure_manage_resource_group_name_test }}"
       register: rg_info
+    
     - name: Delete Resource Group (always)
       azure.azcollection.azure_rm_resourcegroup:
         name: "{{ azure_manage_resource_group_name_test }}"
@@ -87,7 +88,6 @@
           - rg_info.resourcegroups[0].name == azure_manage_resource_group_name_test
           - rg_info.resourcegroups[0].location == azure_manage_resource_group_region
           - rg_info.resourcegroups[0].tags == azure_manage_resource_group_tags_test
-          - azure_manage_resource_group_lock_resource_group == true
 
     # Test: Try to delete Locked Resource Group without force
     - name: Try to delete Locked Resource Group without force
@@ -130,6 +130,19 @@
       azure.azcollection.azure_rm_resourcegroup_info:
         name: "{{ azure_manage_resource_group_name_test }}"
       register: rg_info
+    
+    - name: Get lock info for the resource group
+      azure.azcollection.azure_rm_lock_info:
+        resource_group: "{{ azure_manage_resource_group_name_test }}"
+      register: result
+    
+    - name: Delete locks for the resource group
+      azure.azcollection.azure_rm_lock:
+        state: absent
+        name: "{{ azure_manage_resource_group_name_test }}-lock"
+        resource_group: "{{ azure_manage_resource_group_name_test }}"
+      with_items: "{{ result.locks }}"
+
     - name: Delete Resource Group (always)
       azure.azcollection.azure_rm_resourcegroup:
         name: "{{ azure_manage_resource_group_name_test }}"
