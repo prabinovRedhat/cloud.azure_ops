@@ -83,7 +83,7 @@
       vars:
         azure_manage_resource_group_operation: delete
         azure_manage_resource_group_name: "{{ azure_manage_resource_group_name_test }}"
-        azure_manage_resource_group_force_delete_nonempty: false
+        azure_manage_resource_group_force_delete_locked: false
       ignore_errors: yes
       register: delete_result
 
