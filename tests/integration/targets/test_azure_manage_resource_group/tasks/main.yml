@@ -43,6 +43,10 @@
           - rg_info.resourcegroups | length == 0
 
   always:
+    - name: Get Resource Group info
+      azure.azcollection.azure_rm_resourcegroup_info:
+        name: "{{ azure_manage_resource_group_name_test }}"
+      register: rg_info
     - name: Check always task rg_info
       ansible.builtin.debug:
         msg: "rg_info is {{ rg_info.resourcegroups }}"
@@ -116,6 +120,10 @@
           - rg_info.resourcegroups | length == 0
 
   always:
+    - name: Get Resource Group info
+      azure.azcollection.azure_rm_resourcegroup_info:
+        name: "{{ azure_manage_resource_group_name_test }}"
+      register: rg_info
     - name: Check always task rg_info
       ansible.builtin.debug:
         msg: "rg_info is {{ rg_info.resourcegroups }}"
