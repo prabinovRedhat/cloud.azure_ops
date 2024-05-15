@@ -67,8 +67,25 @@
           - rg_info.resourcegroups.tags == azure_manage_resource_group_region_test
           - azure_manage_resource_group_lock_resource_group == true
 
-    # Test: Delete Resource Group with force delete when locked
-    - name: Delete Resource Group with force delete when locked
+    # Test: Try to delete Locked Resource Group without force
+    - name: Try to delete Locked Resource Group without force
+      ansible.builtin.include_role:
+        name: cloud.azure_ops.azure_manage_resource_group
+      vars:
+        azure_manage_resource_group_operation: delete
+        azure_manage_resource_group_name: "{{ azure_manage_resource_group_name_test }}"
+        azure_manage_resource_group_force_delete_nonempty: false
+      ignore_errors: yes
+      register: delete_result
+
+    - name: Check if deletion without force failed
+      ansible.builtin.assert:
+        that:
+          - rg_info.resourcegroups | length == 1
+          - delete_result.failed == true
+
+    # Test: Delete Locked Resource Group with force delete 
+    - name: Delete Locked Resource Group with force delete 
       ansible.builtin.include_role:
         name: cloud.azure_ops.azure_manage_resource_group
       vars:
