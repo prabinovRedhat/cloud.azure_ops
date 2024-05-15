@@ -100,6 +100,12 @@
       ignore_errors: yes
       register: delete_result
 
+    # Verify resource group wasn't deleted
+    - name: Get Resource Group
+      azure.azcollection.azure_rm_resourcegroup_info:
+        name: "{{ azure_manage_resource_group_name_test }}"
+      register: rg_info
+
     - name: Check if deletion without force failed
       ansible.builtin.assert:
         that:
@@ -115,6 +121,7 @@
         azure_manage_resource_group_name: "{{ azure_manage_resource_group_name_test }}"
         azure_manage_resource_group_force_delete_locked: true
 
+    # Verify resource group was deleted
     - name: Get Resource Group
       azure.azcollection.azure_rm_resourcegroup_info:
         name: "{{ azure_manage_resource_group_name_test }}"
