@@ -32,10 +32,9 @@
       ansible.builtin.assert:
         that:
           - rg_info.resourcegroups | length == 1
-          - rg_info.resourcegroups.name == azure_manage_resource_group_name_test
-          - rg_info.resourcegroups.location == azure_manage_resource_group_region_test
-          - rg_info.resourcegroups.tags == azure_manage_resource_group_tags_test
-          - azure_manage_resource_group_lock_resource_group == false
+          - rg_info.resourcegroups[0].name == azure_manage_resource_group_name_test
+          - rg_info.resourcegroups[0].location == azure_manage_resource_group_region_test
+          - rg_info.resourcegroups[0].tags == azure_manage_resource_group_tags_test
 
     # Test: Delete Resource Group without locking
     - name: Delete Resource Group without locking
@@ -43,11 +42,11 @@
         name: cloud.azure_ops.azure_manage_resource_group
       vars:
         azure_manage_resource_group_operation: delete
-        azure_manage_resource_group_name: "smiron"
+        azure_manage_resource_group_name: "{{ azure_manage_resource_group_name_test }}"
 
     - name: Get Resource Group
       azure.azcollection.azure_rm_resourcegroup_info:
-        name: "{{ azure_manage_resource_group_name }}"
+        name: "{{ azure_manage_resource_group_name_test }}"
       register: rg_info
 
     - name: Assert that Resource Group was deleted without locking
