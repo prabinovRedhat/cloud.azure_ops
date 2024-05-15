@@ -5,29 +5,33 @@
       ansible.builtin.debug:
         msg: "{{ azure_manage_resource_group_name }}, {{ azure_manage_resource_group_region }}, {{ azure_manage_resource_group_tags }}"
 
-    # Test: Create Resource Group without locking
-    # - name: Create Resource Group without locking
-    #   ansible.builtin.include_role:
-    #     name: cloud.azure_ops.azure_manage_resource_group
-    #   vars:
-    #     azure_manage_resource_group_operation: create
-    #     azure_manage_resource_group_name: "{{ azure_manage_resource_group_name }}"
-    #     azure_manage_resource_group_region: "{{ azure_manage_resource_group_region }}"
-    #     azure_manage_resource_group_tags: "{{ azure_manage_resource_group_tags }}"
+    Test: Create Resource Group without locking
+    - name: Create Resource Group without locking
+      ansible.builtin.include_role:
+        name: cloud.azure_ops.azure_manage_resource_group
+      vars:
+        azure_manage_resource_group_operation: create
+        azure_manage_resource_group_name: "smiron"
+        azure_manage_resource_group_region: "{{ azure_manage_resource_group_region }}"
+        azure_manage_resource_group_tags: "{{ azure_manage_resource_group_tags }}"
 
-    # - name: Get Resource Group info
-    #   azure.azcollection.azure_rm_resourcegroup_info:
-    #     name: "{{ azure_manage_resource_group_name }}"
-    #   register: rg_info
+    - name: Print a message 0
+      ansible.builtin.debug:
+        msg: "Resource group - {{ azure_manage_resource_group_name }} created"
 
-    # - name: Assert that Resource Group was created without locking
-    #   ansible.builtin.assert:
-    #     that:
-    #       - rg_info.resourcegroups | length == 1
-    #       - rg_info.resourcegroups.name == azure_manage_resource_group_name
-    #       - rg_info.resourcegroups.location == azure_manage_resource_group_region
-    #       - rg_info.resourcegroups.tags == azure_manage_resource_group_tags
-    #       - azure_manage_resource_group_lock_resource_group == false
+    - name: Get Resource Group info
+      azure.azcollection.azure_rm_resourcegroup_info:
+        name: "{{ azure_manage_resource_group_name }}"
+      register: rg_info
+
+    - name: Assert that Resource Group was created without locking
+      ansible.builtin.assert:
+        that:
+          - rg_info.resourcegroups | length == 1
+          - rg_info.resourcegroups.name == azure_manage_resource_group_name
+          - rg_info.resourcegroups.location == azure_manage_resource_group_region
+          - rg_info.resourcegroups.tags == azure_manage_resource_group_tags
+          - azure_manage_resource_group_lock_resource_group == false
 
     # Test: Delete Resource Group without locking
     - name: Delete Resource Group without locking
