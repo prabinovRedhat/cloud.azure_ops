@@ -3,11 +3,7 @@
   block:
     - name: Print a message 0
       ansible.builtin.debug:
-        msg: "{{ azure_manage_resource_group_name }}, {{ azure_manage_resource_group_region }}, {{ azure_manage_resource_group_tags }}"
-
-    - name: Add defaults vars
-      ansible.builtin.include_vars:
-        file: defaults/main.yml
+        msg: "{{ azure_manage_resource_group_name_test }}, {{ azure_manage_resource_group_region_test }}, {{ azure_manage_resource_group_tags_test }}"
 
     # Test: Create Resource Group without locking
     - name: Create Resource Group without locking
