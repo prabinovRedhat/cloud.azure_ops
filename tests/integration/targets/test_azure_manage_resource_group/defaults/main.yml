@@ -4,7 +4,5 @@
 # Default values for role variables
 azure_manage_resource_group_name_test: "test-prabinov"
 azure_manage_resource_group_region_test: "eastus"
-azure_manage_resource_group_lock_resource_group_test: false
 azure_manage_resource_group_tags_test: 
   resource_prefix: "{{ resource_prefix }}"
-azure_manage_resource_group_force_delete_locked_test: false
