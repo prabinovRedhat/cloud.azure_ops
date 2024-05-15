@@ -47,6 +47,7 @@
       azure.azcollection.azure_rm_resourcegroup:
         name: "{{ azure_manage_resource_group_name_test }}"
         state: absent
+      when: rg_info.resourcegroups | length > 0  # Only delete if resource group exists
 
 - name: Test role cloud.azure_ops.azure_manage_resource_group with locking var
   block:
@@ -117,3 +118,4 @@
         name: "{{ azure_manage_resource_group_name_test }}"
         azure_manage_resource_group_force_delete_locked: true
         state: absent
+      when: rg_info.resourcegroups | length > 0  # Only delete if resource group exists
