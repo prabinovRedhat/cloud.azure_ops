@@ -1,5 +1,5 @@
 ---
-Determine Azure Region
+# Determine Azure Region
 - name: Gather Resource Group info
   azure.azcollection.azure_rm_resourcegroup_info:
     name: "{{ resource_group }}"
