@@ -9,6 +9,10 @@
   ansible.builtin.set_fact:
     azure_manage_resource_group_region: "{{ __rg_info.resourcegroups.0.location }}"
 
+- name: Print region
+  ansible.builtin.debug:
+    msg: "{{ azure_manage_resource_group_region }}"
+
 # - name: Test role cloud.azure_ops.azure_manage_resource_group without locking var
 #   block:
 #     # Test: Create Resource Group without locking
