@@ -16,9 +16,9 @@
         resource_group: "{{ azure_manage_resource_group_name }}"
       with_items: "{{ result.locks }}"
 
-- name: Sleep for 5 seconds and continue with play
+- name: Sleep for 8 seconds and continue with play
   ansible.builtin.wait_for:
-    timeout: 5
+    timeout: 8
   delegate_to: localhost
 
 - name: Delete resource group
