@@ -89,8 +89,8 @@
           - rg_info.resourcegroups[0].location == azure_manage_resource_group_region
           - rg_info.resourcegroups[0].tags == azure_manage_resource_group_tags_test
 
-    # Test: Try to delete Locked Resource Group without force delete 
-    - name: Try to delete Locked Resource Group without force delete 
+    # [Negative] Test: Try to delete Locked Resource Group without force delete
+    - name: Try to delete Locked Resource Group without force delete (negative)
       ansible.builtin.include_role:
         name: cloud.azure_ops.azure_manage_resource_group
       vars:
