@@ -16,8 +16,13 @@
         resource_group: "{{ azure_manage_resource_group_name }}"
       with_items: "{{ result.locks }}"
 
-# - name: Delete resource group
-#   azure.azcollection.azure_rm_resourcegroup:
-#     name: "{{ azure_manage_resource_group_name }}"
-#     state: absent
-#     force_delete_nonempty: "{{ azure_manage_resource_group_force_delete_nonempty | default(omit) }}"
+- name: Sleep for 30 seconds and continue with play
+  ansible.builtin.wait_for:
+    timeout: 30
+  delegate_to: localhost
+
+- name: Delete resource group
+  azure.azcollection.azure_rm_resourcegroup:
+    name: "{{ azure_manage_resource_group_name }}"
+    state: absent
+    force_delete_nonempty: "{{ azure_manage_resource_group_force_delete_nonempty | default(omit) }}"
