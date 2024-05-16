@@ -98,8 +98,7 @@
         azure_manage_resource_group_name: "{{ azure_manage_resource_group_name_test }}"
         azure_manage_resource_group_force_delete_locked: false
       register: delete_result
-      failed_when: false
-      # ignore_errors: true  # Continue with playbook execution even if this task fails (is expected)
+      ignore_errors: true  # Continue with playbook execution even if this task fails (is expected)
 
     # Verify resource group wasn't deleted without force delete
     - name: Get Resource Group
