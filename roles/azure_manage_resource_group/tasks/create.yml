@@ -3,10 +3,6 @@
   ansible.builtin.fail:
     msg: Azure Region must be defined as azure_manage_resource_group_region
   when: azure_manage_resource_group_region is not defined
-
-- name: Print region
-  ansible.builtin.debug:
-    msg: "{{ azure_manage_resource_group_region }}"
   
 - name: Create resource group
   azure.azcollection.azure_rm_resourcegroup:
