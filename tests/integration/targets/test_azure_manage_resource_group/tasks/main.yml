@@ -132,27 +132,27 @@
         that:
           - rg_info.resourcegroups | length == 0
 
-  always:
-    - name: Get Resource Group info
-      azure.azcollection.azure_rm_resourcegroup_info:
-        name: "{{ azure_manage_resource_group_name_test }}"
-      register: rg_info
+  # always:
+    # - name: Get Resource Group info
+    #   azure.azcollection.azure_rm_resourcegroup_info:
+    #     name: "{{ azure_manage_resource_group_name_test }}"
+    #   register: rg_info
     
-    - name: Get lock info for the resource group
-      azure.azcollection.azure_rm_lock_info:
-        resource_group: "{{ azure_manage_resource_group_name_test }}"
-      register: result
+    # - name: Get lock info for the resource group
+    #   azure.azcollection.azure_rm_lock_info:
+    #     resource_group: "{{ azure_manage_resource_group_name_test }}"
+    #   register: result
     
-    - name: Delete locks for the resource group
-      azure.azcollection.azure_rm_lock:
-        state: absent
-        name: "{{ item.name }}"
-        resource_group: "{{ azure_manage_resource_group_name_test }}"
-      with_items: "{{ result.locks }}"
+    # - name: Delete locks for the resource group
+    #   azure.azcollection.azure_rm_lock:
+    #     state: absent
+    #     name: "{{ item.name }}"
+    #     resource_group: "{{ azure_manage_resource_group_name_test }}"
+    #   with_items: "{{ result.locks }}"
 
-    - name: Delete Resource Group (always)
-      azure.azcollection.azure_rm_resourcegroup:
-        name: "{{ azure_manage_resource_group_name_test }}"
-        force_delete_nonempty: true
-        state: absent
-      when: rg_info.resourcegroups | length > 0  # Only delete if resource group exists
+    # - name: Delete Resource Group (always)
+    #   azure.azcollection.azure_rm_resourcegroup:
+    #     name: "{{ azure_manage_resource_group_name_test }}"
+    #     force_delete_nonempty: true
+    #     state: absent
+    #   when: rg_info.resourcegroups | length > 0  # Only delete if resource group exists
