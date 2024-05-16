@@ -1,13 +1,13 @@
 ---
-# Determine Azure Region
-# - name: Gather Resource Group info
-#   azure.azcollection.azure_rm_resourcegroup_info:
-#     name: "{{ resource_group }}"
-#   register: __rg_info
+Determine Azure Region
+- name: Gather Resource Group info
+  azure.azcollection.azure_rm_resourcegroup_info:
+    name: "{{ resource_group }}"
+  register: __rg_info
 
-# - name: Set Azure Region for azure_manage_resource_group Role
-#   ansible.builtin.set_fact:
-#     azure_manage_resource_group_region: "{{ __rg_info.resourcegroups.0.location }}"
+- name: Set Azure Region for azure_manage_resource_group Role
+  ansible.builtin.set_fact:
+    azure_manage_resource_group_region: "{{ __rg_info.resourcegroups.0.location }}"
 
 # - name: Test role cloud.azure_ops.azure_manage_resource_group without locking var
 #   block:
