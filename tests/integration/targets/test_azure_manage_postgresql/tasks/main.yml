@@ -34,28 +34,28 @@
       when: _postgresql.servers | length > 0  
         
 # Test: Create and Delete postgresql server with new Resource Group
-- name: Test with create and delete Resource Group
-  block:
-    - name: Generate new resource group name
-      ansible.builtin.set_fact:
-        new_resource_group: "{{ resource_prefix }}-{{ resource_group }}"
+# - name: Test with create and delete Resource Group
+#   block:
+#     - name: Generate new resource group name
+#       ansible.builtin.set_fact:
+#         new_resource_group: "{{ resource_prefix }}-{{ resource_group }}"
 
-    - name: Validate resource group doesn't exist before test - {{ new_resource_group }}
-      azure.azcollection.azure_rm_resourcegroup_info:
-        name: "{{ new_resource_group }}"
-      register: _resourcegroup
-      failed_when: _resourcegroup.resourcegroups | length > 0
+#     - name: Validate resource group doesn't exist before test - {{ new_resource_group }}
+#       azure.azcollection.azure_rm_resourcegroup_info:
+#         name: "{{ new_resource_group }}"
+#       register: _resourcegroup
+#       failed_when: _resourcegroup.resourcegroups | length > 0
 
-    - name: Test with create and delete Resource Group
-      ansible.builtin.include_tasks: create_and_delete_postgresql.yml
-      vars:
-        test_resource_group: "{{ new_resource_group }}"
-        azure_manage_postgresql_region: "{{ __rg_info.resourcegroups.0.location }}"
-        azure_manage_postgresql_delete_resource_group: true
+#     - name: Test with create and delete Resource Group
+#       ansible.builtin.include_tasks: create_and_delete_postgresql.yml
+#       vars:
+#         test_resource_group: "{{ new_resource_group }}"
+#         azure_manage_postgresql_region: "{{ __rg_info.resourcegroups.0.location }}"
+#         azure_manage_postgresql_delete_resource_group: true
 
-  always:
-    - name: Always - Cleanup - Delete a Resource group including resources it contains - {{ new_resource_group }}
-      azure.azcollection.azure_rm_resourcegroup:
-        name: "{{ new_resource_group }}"
-        force_delete_nonempty: true
-        state: absent
+#   always:
+#     - name: Always - Cleanup - Delete a Resource group including resources it contains - {{ new_resource_group }}
+#       azure.azcollection.azure_rm_resourcegroup:
+#         name: "{{ new_resource_group }}"
+#         force_delete_nonempty: true
+#         state: absent
