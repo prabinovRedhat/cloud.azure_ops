@@ -1,4 +1,6 @@
 ---
+azure_manage_postgresql_resource_group_tags:
+  resource_prefix: "{{ resource_prefix }}"
 azure_manage_postgresql_postgresql_name: "{{ resource_prefix }}-postgresql-server"
 azure_manage_postgresql_postgresql_admin_username: "ansible"
 azure_manage_postgresql_postgresql_sku:
