@@ -20,7 +20,7 @@
     
     - name: Print a message 0
       ansible.builtin.debug:
-        msg: "{{ azure_manage_postgresql_postgresql_settings }}""
+        msg: "{{ azure_manage_postgresql_postgresql_settings }}"
 
     # Test: Create PostgreSQL Server
     - name: Create PostgreSQL Server
