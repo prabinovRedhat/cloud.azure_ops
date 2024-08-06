@@ -15,8 +15,12 @@
         azure_manage_postgresql_postgresql_database_instances:
           - name: "database-test"
         azure_manage_postgresql_postgresql_settings:
-          - name: deadlock_timeout
+          - name: "deadlock_timeout"
             value: 2000
+    
+    - name: Print a message 0
+      ansible.builtin.debug:
+        msg: "{{ azure_manage_postgresql_postgresql_settings }}""
 
     # Test: Create PostgreSQL Server
     - name: Create PostgreSQL Server
