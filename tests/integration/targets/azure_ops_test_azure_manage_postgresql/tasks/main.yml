@@ -10,6 +10,12 @@
     name: "{{ resource_group }}"
   register: __rg_info
 
+# Generate a unique PostgreSQL server name
+- name: Generate a unique PostgreSQL server name
+  ansible.builtin.set_fact:
+    azure_manage_postgresql_postgresql_unique_name: "test-postgresql-server-{{ lookup('community.general.random_string', length=4, min_numeric=1) }}"
+  when: azure_manage_postgresql_postgresql_name is not defined
+
 # Test: Create and Delete postgresql server with pre-created Resource Group
 - name: Test with pre-created Resource Group
   block:
@@ -18,18 +24,19 @@
       vars:
         test_resource_group: "{{ resource_group }}"
         azure_manage_postgresql_region: "{{ __rg_info.resourcegroups.0.location }}"
+        azure_manage_postgresql_postgresql_name: "{{ azure_manage_postgresql_postgresql_unique_name }}"  # Pass the unique server name here
 
   always:
     - name: Always - Gather PostgreSQL Server info
       azure.azcollection.azure_rm_postgresqlserver_info:
         resource_group: "{{ resource_group }}"
-        name: "{{ azure_manage_postgresql_postgresql_name }}"
+        name: "{{ azure_manage_postgresql_postgresql_unique_name }}"
       register: _postgresql
 
     - name: Cleanup - Delete a PostgreSQL Server, resource_group={{ resource_group }}
       azure.azcollection.azure_rm_postgresqlserver:
         resource_group: "{{ resource_group }}"
-        name: "{{ azure_manage_postgresql_postgresql_name }}"
+        name: "{{ azure_manage_postgresql_postgresql_unique_name }}"
         state: absent
       when: _postgresql.servers | length > 0  
         
@@ -52,6 +59,7 @@
         test_resource_group: "{{ new_resource_group }}"
         azure_manage_postgresql_region: "{{ __rg_info.resourcegroups.0.location }}"
         azure_manage_postgresql_delete_resource_group: true
+        azure_manage_postgresql_postgresql_name: "{{ azure_manage_postgresql_postgresql_unique_name }}"  # Pass the unique server name here
 
   always:
     - name: Always - Cleanup - Delete a Resource group including resources it contains - {{ new_resource_group }}
