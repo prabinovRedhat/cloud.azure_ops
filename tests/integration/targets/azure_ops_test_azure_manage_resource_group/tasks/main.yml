@@ -1,4 +1,17 @@
 ---
+- name: Check installed version of azure.azcollection
+  ansible.builtin.command:
+    cmd: "ansible-galaxy collection list azure.azcollection"
+  register: azure_collection_version
+
+- name: Display installed azure.azcollection version
+  ansible.builtin.debug:
+    msg: "{{ azure_collection_version.stdout }}"
+
+- name: Fail the task with a custom message
+  ansible.builtin.fail:
+    msg: "CHECK VERSION AZURE This task has failed intentionally."
+
 # Determine Azure Region
 - name: Gather Resource Group info
   azure.azcollection.azure_rm_resourcegroup_info:
